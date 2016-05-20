@@ -28,18 +28,18 @@ locastyle.steps = (function() {
   };
 
   function checkModule() {
-    var modules =  document.querySelectorAll(config.selectors.module).length;
+    var modules =  $(config.selectors.module).length;
     var isModules = (modules > 0) ? true : false;
-    
-    if(isModules) {
-      console.info("Locastyle: module [steps] successfully initialized.");
+
+    if (isModules) {
+      console.info('Locastyle: module [steps] successfully initialized.');
     }
 
     return isModules;
   }
 
   function init() {
-    if(checkModule()) {
+    if (checkModule()) {
       unbind();
       createArrow();
       ariaSteps();
@@ -98,6 +98,7 @@ locastyle.steps = (function() {
   function addAriaLabel() {
     var $elem = $(config.selectors.button);
     var elemLength = $elem.length;
+
     for (var i=0; i < elemLength; i++) {
       var text = $($elem[i]).attr('title');
       $($elem[i]).attr({ 'aria-label' : text });
@@ -109,7 +110,7 @@ locastyle.steps = (function() {
     var index = $(config.selectors.nav).find(config.classes.active).index();
 
     // Checks if there are any enabled button to load the page
-    if(index ===  -1) {
+    if (index ===  -1) {
       $(config.selectors.nav).each(function() {
         var $el = $(this).find('li:first').find(config.selectors.button);
         var $target = $el.data('target');
@@ -120,13 +121,14 @@ locastyle.steps = (function() {
       addActiveContent(index);
       $(config.selectors.nav).find('li:lt(' + index + ')').addClass(config.status.actived);
     }
+
     var heightStepVisible = $(config.selectors.moduleVisible).height();
     stepsAffix(heightStepVisible);
   }
 
   //Create the step by activated navigation buttons
   function bindClickOnTriggers() {
-    $(config.selectors.nav).on("click.steps", config.selectors.moduleActive, function(evt) {
+    $(config.selectors.nav).on('click.steps', config.selectors.moduleActive, function(evt) {
       evt.preventDefault();
       changeStep($(this));
     });
@@ -157,7 +159,7 @@ locastyle.steps = (function() {
     var beforeEvent = jQuery.Event('BeforeNextStep');
     $(document).trigger(beforeEvent);
 
-    if(!evt.isDefaultPrevented() && !beforeEvent.isDefaultPrevented()) {
+    if (!evt.isDefaultPrevented() && !beforeEvent.isDefaultPrevented()) {
       var $el = $(config.selectors.nav).find(config.classes.active).next('li').addClass(config.status.active).find(config.selectors.button);
       changeStep($el);
       $(document).trigger(jQuery.Event('AfterNextStep'));
@@ -173,7 +175,7 @@ locastyle.steps = (function() {
     var beforeEvent = jQuery.Event('BeforePrevStep');
     $(document).trigger(beforeEvent);
 
-    if(!evt.isDefaultPrevented() && !beforeEvent.isDefaultPrevented()) {
+    if (!evt.isDefaultPrevented() && !beforeEvent.isDefaultPrevented()) {
       var $el = $(config.selectors.nav).find(config.classes.active).prev('li').find(config.selectors.button);
       changeStep($el);
       $(document).trigger(jQuery.Event('AfterPrevStep'));
@@ -190,23 +192,24 @@ locastyle.steps = (function() {
       if ($(window).width() < 768) {
         return;
       }
-     if ($(window).scrollTop() > offset.top ) {
+
+      if ($(window).scrollTop() > offset.top ) {
         var $scroll = parseInt($(window).scrollTop() - $heightNav, 10);
 
         $steps.stop().animate({
-         marginTop: $(window).scrollTop() - offset.top + 20
+          marginTop: $(window).scrollTop() - offset.top + 20
         });
 
-        if($scroll + $heightNav >= elemVisible ) {
+        if ($scroll + $heightNav >= elemVisible ) {
           $steps.stop().animate({
-           marginTop: 0
-         });
+            marginTop: 0
+          });
         }
-     } else {
-       $steps.stop().animate({
-         marginTop: 0
-       });
-     }
+      } else {
+        $steps.stop().animate({
+          marginTop: 0
+        });
+      }
     });
   }
 
@@ -230,17 +233,17 @@ locastyle.steps = (function() {
 
   //Active step
   function activateStep(el, $target) {
-    $(el).parents("li").addClass(config.status.active);
-    $(el).parents("li").prev('li').addClass(config.status.actived);
+    $(el).parents('li').addClass(config.status.active);
+    $(el).parents('li').prev('li').addClass(config.status.actived);
     $target.addClass(config.status.active).attr({ 'aria-hidden' : false });
     $(el).attr('aria-selected' , true);
   }
 
   //Desactive step
   function deactivateStep(el, $target) {
-    $(el).parents("li").siblings().removeClass(config.status.active);
+    $(el).parents('li').siblings().removeClass(config.status.active);
     $target.siblings().removeClass(config.status.active).attr({ 'aria-hidden' : true });
-    $(el).parents("li").siblings().find(config.selectors.button).attr('aria-selected' , false);
+    $(el).parents('li').siblings().find(config.selectors.button).attr('aria-selected' , false);
   }
 
   // Create scrollTop when to click
