@@ -4,10 +4,10 @@ locastyle.popover = (function() {
   'use strict';
 
   var config = {
-    module       : '[data-ls-module="popover"]',
-    idPopover    : '#ls-popover-',
-    popoverClass : '.ls-popover',
-    trigger      : 'click',
+    module: '[data-ls-module="popover"]',
+    idPopover: '#ls-popover-',
+    popoverClass: '.ls-popover',
+    trigger: 'click',
     events: {
       clickAnywhere: 'click.clickanywhere',
       opened: 'popover:opened',
@@ -17,18 +17,18 @@ locastyle.popover = (function() {
   }
 
   function checkModule() {
-    var modules = document.querySelectorAll(config.module).length;
+    var modules = $(config.module).length;
     var isModules = (modules > 0) ? true : false;
-    
+
     if(isModules) {
-      console.info("Locastyle: module [popover] successfully initialized.");
+      console.info('Locastyle: module [popover] successfully initialized.');
     }
 
     return isModules;
   }
 
   function init() {
-    if(checkModule()) {
+    if (checkModule()) {
       clickAnywhereClose();
       bindPopover();
       startOpened();
@@ -73,32 +73,30 @@ locastyle.popover = (function() {
         setPosition(popoverTrigger);
       });
     });
-
   }
 
   // If popover was not created, we build the HTML using a template
   function buildPopover(index, popoverTrigger) {
     var data = {
-      index        : index,
-      title        : $(popoverTrigger).data('title'),
-      content      : $(popoverTrigger).data('content'),
-      placement    : $(popoverTrigger).data('placement'),
+      index: index,
+      title: $(popoverTrigger).data('title'),
+      content: $(popoverTrigger).data('content'),
+      placement: $(popoverTrigger).data('placement'),
       customClasses: $(popoverTrigger).data('custom-class')
     }
 
     $('body').append(locastyle.templates.popover(data));
-
   }
 
   // Define position of popovers
   function setPosition(popoverTrigger) {
     var data = {
-        target    : $(popoverTrigger).data('target'),
-        top       : $(popoverTrigger).offset().top,
-        left      : $(popoverTrigger).offset().left,
-        width     : $(popoverTrigger).outerWidth(),
-        height    : $(popoverTrigger).outerHeight(),
-        placement : $(popoverTrigger).data('placement')
+        target: $(popoverTrigger).data('target'),
+        top: $(popoverTrigger).offset().top,
+        left: $(popoverTrigger).offset().left,
+        width: $(popoverTrigger).outerWidth(),
+        height: $(popoverTrigger).outerHeight(),
+        placement: $(popoverTrigger).data('placement')
     }
 
     // Define the position of popovers and your elements triggers
@@ -127,9 +125,7 @@ locastyle.popover = (function() {
           top : data.top  -=  12,
           left: data.left += (data.width/2 + 4)
         });
-
     }
-
   }
 
   // Show called popover
@@ -143,10 +139,9 @@ locastyle.popover = (function() {
     $(target || '.ls-popover.ls-active').removeClass('ls-active');
     $(target).trigger(config.events.closed).off(config.events.opened);
 
-    if(!$('.ls-popover.ls-active').length) {
+    if (!$('.ls-popover.ls-active').length) {
       $(document).off(config.events.clickAnywhere);
     }
-
   }
 
   // Destroy all created popovers
@@ -162,8 +157,8 @@ locastyle.popover = (function() {
   }
 
   function clickAnywhereClose(target) {
-    $(document).on(config.events.clickAnywhere, function(event){
-      if(!$(event.target).parents('.ls-popover').length){
+    $(document).on(config.events.clickAnywhere, function(event) {
+      if (!$(event.target).parents('.ls-popover').length) {
         hide(target);
       }
     });
@@ -177,9 +172,9 @@ locastyle.popover = (function() {
   }
 
   return {
-    init   : init,
-    show   : show,
-    hide   : hide,
+    init: init,
+    show: show,
+    hide: hide,
     destroy: destroy
   };
 
