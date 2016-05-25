@@ -5,25 +5,25 @@ locastyle.tabs = (function() {
 
   var config = {
     module: '[data-ls-module="tabs"]',
-    tab : '.ls-tabs-nav',
+    tab: '.ls-tabs-nav',
     tabLink: '.ls-tabs-nav a',
     tabListActive: '.ls-tabs-nav li.ls-active a',
     tabContent: '.ls-tab-content'
   };
 
   function checkModule() {
-    var modules = document.querySelectorAll(config.module).length;
+    var modules = $(config.module).length;
     var isModules = (modules > 0) ? true : false;
-    
-    if(isModules) {
-      console.info("Locastyle: module [tabs] successfully initialized.");
+
+    if (isModules) {
+      console.info('Locastyle: module [tabs] successfully initialized.');
     }
 
     return isModules;
   }
 
   function init() {
-    if(checkModule()) {
+    if (checkModule()) {
       unbind();
       bindClickOnTriggers();
       bindBreakpointUpdateOnChecker();
@@ -50,7 +50,7 @@ locastyle.tabs = (function() {
 
   // bind the breakpoint-updated event calls the checker when fired
   function bindBreakpointUpdateOnChecker() {
-    $(window).on('breakpoint-updated', function () {
+    $(window).on('breakpoint-updated', function() {
       locastyle.tabs.checkBreakpoint();
     });
   }
@@ -62,9 +62,9 @@ locastyle.tabs = (function() {
 
   // check the breakpoint and if the tab is already in droppdown mode
   function checkBreakpoint() {
-    if(locastyle.breakpointClass === 'ls-window-sm' || locastyle.breakpointClass === 'ls-window-xs'){
-      $('.ls-tabs-nav').each(function (index, value) {
-        if(!isDropdownMode(value)){
+    if (locastyle.breakpointClass === 'ls-window-sm' || locastyle.breakpointClass === 'ls-window-xs') {
+      $('.ls-tabs-nav').each(function(index, value) {
+        if (!isDropdownMode(value)) {
           dropdownShape(value);
         }
       });
@@ -103,7 +103,7 @@ locastyle.tabs = (function() {
     $(el).parents('li').addClass('ls-active');
     $(el).trigger('tab:activated');
     $target.addClass('ls-active');
-    $(el).attr('aria-selected' , true);
+    $(el).attr('aria-selected', true);
   }
 
   // disable tab according to the received arguments
@@ -111,7 +111,7 @@ locastyle.tabs = (function() {
     $(el).parents('li').siblings().removeClass('ls-active');
     $(el).trigger('tab:deactivated');
     $target.siblings().removeClass('ls-active');
-    $(el).parents('li').siblings().find('a').attr('aria-selected' , false);
+    $(el).parents('li').siblings().find('a').attr('aria-selected', false);
   }
 
   // remove binds added by the module itself
@@ -120,10 +120,10 @@ locastyle.tabs = (function() {
   }
 
   function ariaTabs() {
-    $(config.tab).attr('role' , 'tablist');
-    $(config.tabLink).attr('role' , 'tab');
-    $(config.tabListActive).attr('aria-selected' , 'true');
-    $(config.tabContent).attr('role' , 'tabpanel');
+    $(config.tab).attr('role', 'tablist');
+    $(config.tabLink).attr('role', 'tab');
+    $(config.tabListActive).attr('aria-selected', 'true');
+    $(config.tabContent).attr('role', 'tabpanel');
   }
 
   return {
@@ -131,7 +131,6 @@ locastyle.tabs = (function() {
     unbind: unbind,
     checkBreakpoint: checkBreakpoint
   };
-
 }());
 
 $(document).ready(locastyle.tabs.init);
