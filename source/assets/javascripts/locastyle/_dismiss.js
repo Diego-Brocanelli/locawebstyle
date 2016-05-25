@@ -9,18 +9,18 @@ locastyle.dismiss = (function() {
   };
 
   function checkModule() {
-    var modules = document.querySelectorAll(config.trigger).length;
+    var modules = $(config.trigger).length;
     var isModules = (modules > 0) ? true : false;
-    
-    if(isModules) {
-      console.info("Locastyle: module [dismiss] successfully initialized.");
+
+    if (isModules) {
+      console.info('Locastyle: module [dismiss] successfully initialized.');
     }
 
     return isModules;
   }
 
   function init() {
-    if(checkModule()) {
+    if (checkModule()) {
       unbind();
       bindClickOnTriggers();
     }
@@ -39,9 +39,11 @@ locastyle.dismiss = (function() {
 
   function checkTarget(el) {
     var target = $(el).parents('.ls-dismissable');
+
     if ($(el).data('target')) {
       target = ($(el).data('target'));
     }
+
     dismiss(target);
   }
 
