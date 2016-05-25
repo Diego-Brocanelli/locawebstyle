@@ -7,29 +7,29 @@ locastyle.collapse = (function() {
   var config = {
     trigger: '[data-ls-module="collapse"]',
     classes: {
-      header        : '.ls-collapse-header',
-      content       : '.ls-collapse-body',
+      header: '.ls-collapse-header',
+      content: '.ls-collapse-body',
       groupContainer: '.ls-collapse-group',
-      open          : 'ls-collapse-open',
-      close         : 'ls-collapse-close',
-      opened        : 'ls-collapse-opened',
-      alwaysOpened  : 'ls-collapse-opened-always'
+      open: 'ls-collapse-open',
+      close: 'ls-collapse-close',
+      opened: 'ls-collapse-opened',
+      alwaysOpened: 'ls-collapse-opened-always'
     }
   };
 
   function checkModule() {
-    var modules = document.querySelectorAll(config.trigger).length;
+    var modules = $(config.trigger).length;
     var isModules = (modules > 0) ? true : false;
-    
-    if(isModules) {
-      console.info("Locastyle: module [collapse] successfully initialized.");
+
+    if (isModules) {
+      console.info('Locastyle: module [collapse] successfully initialized.');
     }
 
     return isModules;
   }
 
   function init() {
-    if(checkModule()) {
+    if (checkModule()) {
       // set attributes from all collapses on load
       $(config.classes.header).each(function() {
         ariaCollapse($(this));
@@ -49,7 +49,6 @@ locastyle.collapse = (function() {
           ariaCollapse($(this));
           // set event
           eventsHandler($(this), target);
-
         });
         // if click on ck-collapse-body no action happens
         $(config.classes.content).on('click.ls', function(event) {
@@ -68,7 +67,7 @@ locastyle.collapse = (function() {
   }
 
   function eventsHandler(el, target) {
-    if($(target).parent().hasClass(config.classes.opened)) {
+    if ($(target).parent().hasClass(config.classes.opened)) {
       $(target).parent().removeClass(config.classes.opened);
       el.trigger('collapse:closed');
     } else {
@@ -79,19 +78,18 @@ locastyle.collapse = (function() {
 
 
   function ariaCollapse(elem) {
-    if($(elem).hasClass(config.classes.open)){
-      $(config.classes.header).attr({ 'aria-expanded' : true });
-      $(config.classes.content).attr({ 'aria-hidden' : false });
-    }else{
-      $(config.classes.header).attr({ 'aria-expanded' : false });
-      $(config.classes.content).attr({ 'aria-hidden' : true });
+    if ($(elem).hasClass(config.classes.open)) {
+      $(config.classes.header).attr({ 'aria-expanded': true });
+      $(config.classes.content).attr({ 'aria-hidden': false });
+    } else {
+      $(config.classes.header).attr({ 'aria-expanded': false });
+      $(config.classes.content).attr({ 'aria-hidden': true });
     }
   }
 
   return {
     init: init
   };
-
 }());
 
 $(document).ready(locastyle.collapse.init);
