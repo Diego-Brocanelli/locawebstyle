@@ -13,18 +13,18 @@ locastyle.dropdown = (function() {
   };
 
   function checkModule() {
-    var modules = document.querySelectorAll(config.module).length;
+    var modules = $(config.module).length;
     var isModules = (modules > 0) ? true : false;
-    
-    if(isModules) {
-      console.info("Locastyle: module [dropdown] successfully initialized.");
+
+    if (isModules) {
+      console.info('Locastyle: module [dropdown] successfully initialized.');
     }
 
     return isModules;
   }
 
   function init() {
-    if(checkModule()) {
+    if (checkModule()) {
       unbind();
       bindClickOnTriggers();
       bindClickOutsideTriggers();
@@ -33,12 +33,12 @@ locastyle.dropdown = (function() {
   }
 
   function unbind() {
-    $(config.firstLink).off("click.ls");
-    $(config.area).off("click.ls");
+    $(config.firstLink).off('click.ls');
+    $(config.area).off('click.ls');
   }
 
   function bindClickOnTriggers() {
-    $(config.firstLink).on("click.ls", function(evt) {
+    $(config.firstLink).on('click.ls', function(evt) {
       evt.preventDefault();
       var $target = $($(this).parents(config.module));
       locastyle.dropdown.toggleDropdown($target);
@@ -48,15 +48,15 @@ locastyle.dropdown = (function() {
   }
 
   function bindClickOutsideTriggers() {
-    $(config.area).on("click.ls", function(){
+    $(config.area).on('click.ls', function() {
       locastyle.dropdown.closeDropdown();
     });
   }
 
   function toggleDropdown($target) {
-    if(!$target.find(config.button).first().hasClass('ls-disabled')){
+    if (!$target.find(config.button).first().hasClass('ls-disabled')) {
       closeDropdown($target);
-      $target.toggleClass("ls-active");
+      $target.toggleClass('ls-active');
       ariaDropdown($target);
       locastyle.topbarCurtain.hideCurtains();
       eventsHandler($target);
@@ -64,7 +64,7 @@ locastyle.dropdown = (function() {
   }
 
   function eventsHandler(el) {
-    if($(el).hasClass("ls-active")) {
+    if ($(el).hasClass('ls-active')) {
       $(el).trigger('dropdown:opened');
     } else {
       $(el).trigger('dropdown:closed');
@@ -72,30 +72,30 @@ locastyle.dropdown = (function() {
   }
 
   function closeDropdown(el) {
-    $(config.module).not(el).removeClass("ls-active");
+    $(config.module).not(el).removeClass('ls-active');
   }
 
   function setPositionVisible($target){
     var $main = $(config.area);
-    if($main.get(0).scrollWidth > $main.width()){
+    if ($main.get(0).scrollWidth > $main.width()) {
       $($target).addClass('ls-pos-right');
     }
   }
 
   function ariaDropdown(el) {
-    $(config.button).attr({ 'aria-expanded' : 'false' });
-    $(config.nav).attr({ 'aria-hidden' : 'true' });
+    $(config.button).attr({ 'aria-expanded': 'false' });
+    $(config.nav).attr({ 'aria-hidden': 'true' });
 
     $(el).each(function() {
-      $(config.nav).find('a').attr({ role : 'option' });
-      $(config.button).attr({ role : 'combobox' });
+      $(config.nav).find('a').attr({ role: 'option' });
+      $(config.button).attr({ role: 'combobox' });
 
-      if($(this).hasClass('ls-active')){
-        $(config.button, $(this)).attr({ 'aria-expanded' : 'true' });
-        $(config.nav, $(this)).attr({ 'aria-hidden' : 'false' });
+      if ($(this).hasClass('ls-active')) {
+        $(config.button, $(this)).attr({ 'aria-expanded': 'true' });
+        $(config.nav, $(this)).attr({ 'aria-hidden': 'false' });
       } else {
-        $(config.button, $(this)).attr({ 'aria-expanded' : 'false' });
-        $(config.nav, $(this)).attr({ 'aria-hidden' : 'true' });
+        $(config.button, $(this)).attr({ 'aria-expanded': 'false' });
+        $(config.nav, $(this)).attr({ 'aria-hidden': 'true' });
       }
     });
   }
@@ -106,7 +106,6 @@ locastyle.dropdown = (function() {
     toggleDropdown: toggleDropdown,
     closeDropdown: closeDropdown
   };
-
 }());
 
 $(document).ready(locastyle.dropdown.init);
