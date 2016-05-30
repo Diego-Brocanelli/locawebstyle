@@ -9,7 +9,6 @@ var locastyle = (function() {
 
   // Used to run scripts that just when all things are ready
   function init() {
-    locastyle.breakpoints.init();
     loadModules();
     locastyle.general.init();
     locastyle.btnGroup.init();
