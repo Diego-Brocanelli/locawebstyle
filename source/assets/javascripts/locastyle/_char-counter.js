@@ -24,7 +24,7 @@ locastyle.charCounter = (function() {
     }
   }
 
-  function countText(){
+  function countText() {
     $(config.module).each(function(index, field) {
       var limit = $(field).attr('maxlength');
       $(field).removeAttr('maxlength').data().maxlength = limit;

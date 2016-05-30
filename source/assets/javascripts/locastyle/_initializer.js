@@ -13,7 +13,6 @@ var locastyle = (function() {
     loadModules();
     locastyle.general.init();
     locastyle.btnGroup.init();
-    locastyle.alert.init();
     locastyle.datepicker.init();
     locastyle.form.togglePasswordField();
     locastyle.form.triggerCalendar();
@@ -25,7 +24,7 @@ var locastyle = (function() {
     $.each(locastyle.modules, function(i, module){
       locastyle[module].init();
       console.info("Locastyle: module [" + module + "] successfully initialized.");
-      
+
       $.event.trigger(module+':ready', [i, module]);
     });
   }
