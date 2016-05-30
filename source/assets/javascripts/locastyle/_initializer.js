@@ -16,7 +16,6 @@ var locastyle = (function() {
     locastyle.form.togglePasswordField();
     locastyle.form.triggerCalendar();
     checkClassForTrack();
-    locastyle.browserDetect.init();
   }
 
   function loadModules() {

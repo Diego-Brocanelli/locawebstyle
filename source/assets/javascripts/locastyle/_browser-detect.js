@@ -1,17 +1,18 @@
 var locastyle = locastyle || {};
 
 locastyle.modules = locastyle.modules || [];
-locastyle.modules.push('browserDetect');
 
 locastyle.browserDetect = (function() {
   'use strict';
 
+  var name;
   var userAgent = navigator.userAgent.toLowerCase();
+
   function init() {
     browserClass();
+    console.info('Locastyle: module [browserDetect] successfully initialized.');
   }
 
-  var name;
   function browserName() {
     if (userAgent.match(/(firefox)/)) {
       name = userAgent.match(/(firefox)/)[1];
@@ -26,7 +27,7 @@ locastyle.browserDetect = (function() {
   }
 
   function browserClass() {
-    $("html").addClass('ls-browser-'+browserName());
+    $('html').addClass('ls-browser-' + browserName());
   }
 
   return {
@@ -34,5 +35,6 @@ locastyle.browserDetect = (function() {
     browserName: browserName,
     browserVersion: browserVersion
   };
-
 }());
+
+$(document).ready(locastyle.browserDetect.init);
