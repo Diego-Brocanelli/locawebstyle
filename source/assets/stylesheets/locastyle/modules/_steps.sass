@@ -1,5 +1,3 @@
-$with-steps: 85px
-
 .ls-steps
   @extend .ls-clearfix
   position: relative
@@ -48,6 +46,25 @@ $with-steps: 85px
       top: 16px
       right: 12px
 
+  .ls-active,
+  .ls-actived
+
+    .ls-steps-btn
+      cursor: pointer
+      pointer-events: initial
+
+      &:before
+        border: 2px solid $gray3
+        color: #fff
+
+      &:after
+        color: $gray3
+
+  .ls-active
+
+    &:before
+      color: $gray3
+
 .ls-steps-btn
   width: 100%
   background: $gray1
@@ -62,23 +79,6 @@ $with-steps: 85px
   position: relative
   text-align: left
   padding: 10px
-
-  .ls-active &,
-  .ls-actived &
-    cursor: pointer
-    pointer-events: initial
-
-    &:before
-      border: 2px solid $gray3
-      color: #fff
-
-    &:after
-      color: $gray3
-
-  .ls-active &
-
-    &:before
-      color: $gray3
 
   &:hover,
   &:focus,
@@ -163,6 +163,10 @@ $with-steps: 85px
   padding-top: 30px
   margin: 0
 
+  .ls-steps-content > .ls-actions-btn
+    @extend %actions-btn
+    display: block
+
 .ls-steps-content
   position: relative
   display: none
@@ -234,7 +238,7 @@ $with-steps: 85px
 
 @media screen and (min-width: $screen-sm)
 
-  $with-steps: 250px
+  $with-steps: 250px !global
 
   .ls-steps
     margin: 15px 0 15px -15px
@@ -276,6 +280,9 @@ $with-steps: 85px
         top: 24px
         z-index: 1
 
+      &.ls-active .ls-steps-arrow
+        display: block
+
     .ls-actived:not(.ls-active)
       &:after
         top: 12px
@@ -286,10 +293,6 @@ $with-steps: 85px
     border-left: 1px solid $gray2
     padding: 0 15px 0 25px
     margin: 10px 0 0 235px
-
-  .ls-steps-arrow
-    .ls-active &
-      display: block
 
   .ls-steps-btn
     width: 100%

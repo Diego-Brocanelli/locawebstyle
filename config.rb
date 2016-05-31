@@ -86,7 +86,7 @@ helpers CustomHelpers
 
 set :base_url, ""
 
-set :stable, "3.8.1"
+set :stable, "3.8.4"
 
 set :css_dir, 'assets/stylesheets'
 set :js_dir, 'assets/javascripts'
@@ -94,6 +94,9 @@ set :images_dir, 'assets/images'
 
 activate :directory_indexes
 activate :i18n
+
+#Redirect
+#redirect "documentacao/index.html", to: "/documentacao/introducao"
 
 # Build-specific configuration
 configure :build do

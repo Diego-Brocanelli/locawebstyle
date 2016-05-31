@@ -11,7 +11,7 @@
   overflow: hidden
   vertical-align: middle
   height: $input-height
-  width: 98%
+  width: 100%
 
   .ls-box-filter &
     width: 100%
@@ -46,6 +46,10 @@
     &[disabled],
     .ls-form-disable &
       background: $gray1
+
+    // used to Edge
+    &::-ms-expand
+      display: none
 
   &:before
     content: ""

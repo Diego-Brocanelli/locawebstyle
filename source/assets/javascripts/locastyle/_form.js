@@ -53,7 +53,7 @@ locastyle.form = (function() {
   }
 
   function textareaHeight (){
-    $('textarea').each(function (index, textarea) {
+    $('textarea.ls-textarea-autoresize', '.ls-label').each(function (index, textarea) {
       var text = $(textarea).val();
       var lines = text.split(/\r|\r\n|\n/);
       var count = lines.length;
@@ -63,7 +63,7 @@ locastyle.form = (function() {
   }
 
   function masks() {
-    $('.ls-mask-date').mask('11/11/1111');
+    $('.ls-mask-date').mask('00/00/0000');
     $('.ls-mask-time').mask('00:00:00');
     $('.ls-mask-date_time').mask('00/00/0000 00:00:00');
     $('.ls-mask-cep').mask('00000-000');

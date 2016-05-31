@@ -24,11 +24,25 @@ locastyle.charCounter = (function() {
     }
   }
 
+  function updateCounter(index, count) {
+    $('.ls-number-counter-'+index).text(count);
+  }
+
   function countText() {
-    $(config.module).each(function(index, field) {
+    $('[data-ls-module="charCounter"]').each(function(index, field) {
       var limit = $(field).attr('maxlength');
+      var html = '<p class="ls-help-inline"><small><strong ' +
+        'class="ls-char-count ls-number-counter-' + index + '">' + limit +
+        '</strong> caracteres restantes</small></p>';
+      var prefixGroup = $(field).closest('.ls-prefix-group');
+
       $(field).removeAttr('maxlength').data().maxlength = limit;
-      $(field).after('<p class="ls-help-inline"><small><strong class="ls-char-count ls-number-counter-' + index + '">' + limit + '</strong> caracteres restantes</small></p>');
+
+      if (prefixGroup.length) {
+        prefixGroup.after(html);
+      } else {
+        $(field).after(html);
+      }
 
       $(field).keyup(function() {
         var count = $(this).val().length;
@@ -46,8 +60,8 @@ locastyle.charCounter = (function() {
     });
   }
 
-  function updateCounter(index, count) {
-    $('.ls-number-counter-' + index).text(count);
+  function init() {
+    countText();
   }
 
   return {

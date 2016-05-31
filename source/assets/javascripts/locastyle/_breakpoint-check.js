@@ -15,6 +15,9 @@ locastyle.breakpoints = (function() {
     html: null
   };
 
+  //
+  // The userConfig var is used only on Jamine tests
+  //
   function init(userConfig) {
     config.html = $('html');
 
@@ -118,6 +121,8 @@ locastyle.breakpoints = (function() {
 
         // event triggers to inform other modules that the breakpoint has been updated
         $.event.trigger('breakpoint-updated');
+
+        clearTimeout(changeClass);
       }, 300);
     });
   }
