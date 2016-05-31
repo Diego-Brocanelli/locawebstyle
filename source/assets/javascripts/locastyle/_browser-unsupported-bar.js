@@ -1,7 +1,6 @@
 var locastyle = locastyle || {};
 
 locastyle.modules = locastyle.modules || [];
-locastyle.modules.push('browserUnsupportedBar');
 
 locastyle.browserUnsupportedBar = (function() {
   'use strict';
@@ -9,11 +8,12 @@ locastyle.browserUnsupportedBar = (function() {
   function init() {
     browserDetect();
     hideBrowserUnsupportedAlert();
+    console.info('Locastyle: module [browserUnsupportedBar] successfully initialized.');
   }
 
   function browserDetect() {
-    var version            = locastyle.browserDetect.browserVersion();
-    var name               = locastyle.browserDetect.browserName();
+    var version = locastyle.browserDetect.browserVersion();
+    var name = locastyle.browserDetect.browserName();
     var minBrowserVersions = {
       'chrome' : 34,
       'firefox': 29,
@@ -27,7 +27,6 @@ locastyle.browserUnsupportedBar = (function() {
         openUsupportedBrowserAlert();
       }
     }
-
   }
 
   function openUsupportedBrowserAlert() {
@@ -40,12 +39,10 @@ locastyle.browserUnsupportedBar = (function() {
       $('html').removeClass('ls-browser-unsupported');
       $('html .ls-unsupported-bar').remove();
       $.cookie('hideBrowserUnsupportedAlert', true, { expires: 1 });
-
     });
   }
 
   return {
     init: init
   };
-
 }());
