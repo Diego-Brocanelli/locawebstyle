@@ -11,7 +11,6 @@ var locastyle = (function() {
   function init() {
     loadModules();
     locastyle.general.init();
-    locastyle.btnGroup.init();
     locastyle.datepicker.init();
     locastyle.form.togglePasswordField();
     locastyle.form.triggerCalendar();
